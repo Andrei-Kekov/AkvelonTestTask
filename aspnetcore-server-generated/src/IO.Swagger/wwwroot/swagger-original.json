@@ -1,0 +1,326 @@
+{
+  "openapi" : "3.0.3",
+  "info" : {
+    "title" : "Test Task for Akvelon by Andrei Kekov",
+    "version" : "0.1.0"
+  },
+  "servers" : [ {
+    "url" : "/"
+  } ],
+  "paths" : {
+    "/project" : {
+      "get" : {
+        "summary" : "View all existing projects",
+        "operationId" : "getProjects",
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Project"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put" : {
+        "summary" : "Update an existing project",
+        "operationId" : "updateProject",
+        "requestBody" : {
+          "description" : "New project data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Project"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Project ID not found"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add a new project",
+        "operationId" : "addProject",
+        "requestBody" : {
+          "description" : "New project data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Project"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Project"
+                }
+              }
+            }
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/project/{projectId}" : {
+      "delete" : {
+        "summary" : "Delete the project with {projectId}",
+        "operationId" : "deleteProject",
+        "parameters" : [ {
+          "name" : "projectId",
+          "in" : "path",
+          "description" : "ID of project to delete",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Project ID not found"
+          }
+        }
+      }
+    },
+    "/task" : {
+      "put" : {
+        "summary" : "Update an existing task",
+        "operationId" : "updateTask",
+        "requestBody" : {
+          "description" : "New task data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Task"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Project ID or Task ID not found"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      },
+      "post" : {
+        "summary" : "Add a new task to a project",
+        "operationId" : "addTask",
+        "requestBody" : {
+          "description" : "New task data",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/Task"
+              }
+            }
+          },
+          "required" : true
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/Task"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Project ID not found"
+          },
+          "405" : {
+            "description" : "Invalid input"
+          }
+        }
+      }
+    },
+    "/task/{taskId}" : {
+      "delete" : {
+        "summary" : "Delete the task with {taskId}",
+        "parameters" : [ {
+          "name" : "taskId",
+          "in" : "path",
+          "description" : "ID of task to delete",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation"
+          },
+          "404" : {
+            "description" : "Task ID not found"
+          }
+        }
+      }
+    },
+    "/project/{projectId}/tasks" : {
+      "get" : {
+        "summary" : "View all tasks for a project",
+        "operationId" : "getTasks",
+        "parameters" : [ {
+          "name" : "projectId",
+          "in" : "path",
+          "description" : "ID of project to view tasks",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "array",
+                  "items" : {
+                    "$ref" : "#/components/schemas/Task"
+                  },
+                  "x-content-type" : "application/json"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Project ID not found"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "Project" : {
+        "required" : [ "name" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 42
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Dinner"
+          },
+          "startDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "completionDate" : {
+            "type" : "string",
+            "format" : "date-time"
+          },
+          "statusId" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 2
+          },
+          "priority" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 200
+          }
+        },
+        "example" : {
+          "statusId" : 2,
+          "name" : "Dinner",
+          "completionDate" : "2000-01-23T04:56:07.000+00:00",
+          "id" : 42,
+          "priority" : 200,
+          "startDate" : "2000-01-23T04:56:07.000+00:00"
+        }
+      },
+      "Task" : {
+        "required" : [ "name", "projectId" ],
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 65536
+          },
+          "projectId" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 42
+          },
+          "name" : {
+            "type" : "string",
+            "example" : "Cut the potatoes"
+          },
+          "statusId" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 2
+          },
+          "description" : {
+            "type" : "string",
+            "example" : "Peel the potatoes, then cut them into slices"
+          },
+          "priority" : {
+            "type" : "integer",
+            "format" : "int32",
+            "example" : 200
+          }
+        },
+        "example" : {
+          "statusId" : 2,
+          "name" : "Cut the potatoes",
+          "description" : "Peel the potatoes, then cut them into slices",
+          "id" : 65536,
+          "priority" : 200,
+          "projectId" : 42
+        }
+      }
+    }
+  }
+}
