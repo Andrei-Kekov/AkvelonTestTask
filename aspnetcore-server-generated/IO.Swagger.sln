@@ -5,11 +5,14 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IO.Swagger", "src\IO.Swagger\IO.Swagger.csproj", "{561CD939-49BF-4F32-BBB8-EB96069F24AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkvelonTestTask.DataAccess", "AkvelonTestTask.DataAccess\AkvelonTestTask.DataAccess.csproj", "{3F7C37F2-3397-4C43-9A81-A1315573A33E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkvelonTestTask.DataAccess", "AkvelonTestTask.DataAccess\AkvelonTestTask.DataAccess.csproj", "{3F7C37F2-3397-4C43-9A81-A1315573A33E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B88660A7-148C-4C90-A4EB-3C368622EEA3} = {B88660A7-148C-4C90-A4EB-3C368622EEA3}
+	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkvelonTestTask.Logic", "AkvelonTestTask.Logic\AkvelonTestTask.Logic.csproj", "{BE8D9DF3-9FC3-4EF1-98CD-93961F73EC1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkvelonTestTask.Logic", "AkvelonTestTask.Logic\AkvelonTestTask.Logic.csproj", "{BE8D9DF3-9FC3-4EF1-98CD-93961F73EC1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AkvelonTestTask.Common", "AkvelonTestTask.Common\AkvelonTestTask.Common.csproj", "{B88660A7-148C-4C90-A4EB-3C368622EEA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AkvelonTestTask.Common", "AkvelonTestTask.Common\AkvelonTestTask.Common.csproj", "{B88660A7-148C-4C90-A4EB-3C368622EEA3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
