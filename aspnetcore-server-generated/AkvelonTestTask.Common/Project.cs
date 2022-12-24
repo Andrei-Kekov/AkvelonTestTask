@@ -6,16 +6,16 @@ namespace AkvelonTestTask.Common
     public class Project
     {
         [Column("ProjectId")]
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Column("ProjectName")]
         public string Name { get; set; }
 
         [Column("ProjectStartDate")]
-        public DateOnly? StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [Column("ProjectCompletionDate")]
-        public DateOnly? CompletionDate { get; set; }
+        public DateTime? CompletionDate { get; set; }
 
         [Column("ProjectStatusId", TypeName = "tinyint")]
         public ProjectStatus? Status { get; set; }

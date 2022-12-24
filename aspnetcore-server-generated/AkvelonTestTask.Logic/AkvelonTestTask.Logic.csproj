@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AkvelonTestTask.Common\AkvelonTestTask.Common.csproj" />
+    <ProjectReference Include="..\AkvelonTestTask.DataAccess\AkvelonTestTask.DataAccess.csproj" />
+  </ItemGroup>
+
 </Project>

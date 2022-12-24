@@ -12,12 +12,15 @@ namespace AkvelonTestTask.Common
         public string Name { get; set; }
 
         [Column("TaskStatusId", TypeName = "tinyint")]
-        public TaskStatus Status { get; set; }
+        public TaskStatus? Status { get; set; }
 
         [Column("TaskDescription")]
         public string? Description { get; set; }
 
         [Column("TaskPriority")]
         public int? Priority { get; set; }
+
+        [Column("ProjectId")]
+        public int ProjectId { get; set; }
     }
 }
