@@ -1,0 +1,211 @@
+openapi: 3.0.3
+info:
+  title: Test Task for Akvelon by Andrei Kekov
+  version: 1.0.0
+paths:
+  /project:
+    post:
+      summary: Add a new project
+      operationId: addProject
+      requestBody:
+        description: New project data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: Invalid input
+    put:
+      summary: Update an existing project
+      operationId: updateProject
+      requestBody:
+        description: New project data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Project'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '404':
+          description: Project ID not found
+    get:
+      summary: View all existing projects
+      operationId: getProjects
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+  /project/{projectId}:
+    delete:
+      summary: Delete the project with {projectId}
+      parameters:
+        - name: projectId
+          in: path
+          description: ID of project to delete
+          required: true
+          schema:
+            type: integer
+            format: int32
+      operationId: deleteProject
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Project ID not found
+  /task:
+    post:
+      summary: Add a new task to a project
+      operationId: addTask
+      requestBody:
+        description: New task data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: Invalid input
+        '404':
+          description: Project ID not found
+    put:
+      summary: Update an existing task
+      operationId: updateTask
+      requestBody:
+        description: New task data
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Task'
+        required: true
+      responses:
+        '200':
+          description: Successful operation
+        '400':
+          description: Invalid input
+        '404':
+          description: Project ID or Task ID not found
+  /task/{taskId}:
+    delete:
+      summary: Delete the task with {taskId}
+      operationId: deleteTask
+      parameters:
+        - name: taskId
+          in: path
+          description: ID of task to delete
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Successful operation
+        '404':
+          description: Task ID not found
+  
+  /project/{projectId}/tasks:
+    parameters:
+        - name: projectId
+          in: path
+          description: ID of project to view tasks
+          required: true
+          schema:
+            type: integer
+            format: int32
+    get:
+      summary: View all tasks for a project
+      operationId: getTasks
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '404':
+          description: Project ID not found
+      
+
+components:
+  schemas:
+    Project:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 42
+        name:
+          type: string
+          example: Dinner
+        startDate:
+          type: string
+          format: date-time
+          example: 2000-01-13
+        completionDate:
+          type: string
+          format: date-time
+          example: 2010-02-14
+        statusId:
+          type: integer
+          format: int32
+          example: 2
+        priority:
+          type: integer
+          format: int32
+          example: 200
+      required:
+        - name
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          example: 65536
+        projectId:
+          type: integer
+          format: int32
+          example: 42
+        name:
+          type: string
+          example: Cut the potatoes
+        statusId:
+          type: integer
+          format: int32
+          example: 2
+        description:
+          type: string
+          example: Peel the potatoes, then cut them into slices
+        priority:
+          type: integer
+          format: int32
+          example: 200
+      required:
+        - projectId
+        - name
